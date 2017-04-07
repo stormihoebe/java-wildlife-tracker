@@ -25,7 +25,35 @@ public class App {
       model.put("template", "templates/animal-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-    //
+
+    post("/animal/new/nonEndangered", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      NonEndangeredAnimal animal = new NonEndangeredAnimal(name);
+      animal.save();
+      model.put("nonEndangeredAnimals", NonEndangeredAnimal.all());
+      model.put("endangeredAnimals", EndangeredAnimal.all());
+      response.redirect("/animals");
+    });
+
+    post("/animal/new/endangered", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      String health = request.queryParams("health");
+      String age = request.queryParams("age");
+      EndangeredAnimal animal = new EndangeredAnimal(name, health, age);
+      animal.save();
+      model.put("nonEndangeredAnimals", NonEndangeredAnimal.all());
+      model.put("endangeredAnimals", EndangeredAnimal.all());
+      response.redirect("/animals");
+    });
+
+    get("/animals/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/animal-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
     // post("/endangered_sighting", (request, response) -> {
     //   Map<String, Object> model = new HashMap<String, Object>();
@@ -65,27 +93,7 @@ public class App {
     //   return new ModelAndView(model, layout);
     // }, new VelocityTemplateEngine());
     //
-    // post("/animal/new", (request, response) -> {
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   boolean endangered = request.queryParamsValues("endangered")!=null;
-    //   if (endangered) {
-    //     String name = request.queryParams("name");
-    //     String health = request.queryParams("health");
-    //     String age = request.queryParams("age");
-    //     EndangeredAnimal endangeredAnimal = new EndangeredAnimal(name, health, age);
-    //     endangeredAnimal.save();
-    //     model.put("animals", Animal.all());
-    //     model.put("endangeredAnimals", EndangeredAnimal.all());
-    //   } else {
-    //     String name = request.queryParams("name");
-    //     Animal animal = new Animal(name);
-    //     animal.save();
-    //     model.put("animals", Animal.all());
-    //     model.put("endangeredAnimals", EndangeredAnimal.all());
-    //   }
-    //   response.redirect("/");
-    //     return null;
-    //   });
+
     //
     // get("/animal/:id", (request, response) -> {
     //   Map<String, Object> model = new HashMap<String, Object>();

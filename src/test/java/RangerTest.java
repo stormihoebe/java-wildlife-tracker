@@ -9,4 +9,9 @@ public class RangerTest {
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
+  @Test
+  public void Ranger_instantiatesCorrectly_true() {
+    Ranger testRanger = new Ranger("Rick");
+    assertEquals(true, testRanger instanceof Ranger);
+  }
 }

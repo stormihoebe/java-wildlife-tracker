@@ -52,15 +52,6 @@ public abstract class Animal {
     return allAnimals;
   }
 
-  // public static Animal find(int id) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "SELECT * FROM animals WHERE id=:id;";
-  //     Animal animal = con.createQuery(sql)
-  //       .addParameter("id", id)
-  //       .executeAndFetchFirst(Animal.class);
-  //     return animal;
-  //   }
-  // }
 
   public void updateName(String name) {
     try(Connection con = DB.sql2o.open()) {

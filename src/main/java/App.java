@@ -60,6 +60,22 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/animals/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      int animalId = Integer.parseInt(request.params(":id"));
+      if(NonEndangeredAnimal.find(animalId) == null) {
+        EndangeredAnimal animal = EndangeredAnimal.find(animalId);
+        model.put("animal", animal);
+      } else {
+        NonEndangeredAnimal animal = NonEndangeredAnimal.find(animalId);
+        model.put("animal", animal);
+      }
+      model.put("template", "templates/animal.vtl");
+
+      model.put("sightings", Sighting.all());
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
     // post("/endangered_sighting", (request, response) -> {
     //   Map<String, Object> model = new HashMap<String, Object>();

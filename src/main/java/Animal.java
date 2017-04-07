@@ -2,14 +2,11 @@ import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animal {
+public abstract class Animal {
   public String name;
   public int id;
+  public String type;
 
-  public Animal(String name) {
-    this.name = name;
-    this.id = id;
-  }
 
   public String getName() {
     return name;
@@ -17,6 +14,10 @@ public class Animal {
 
   public int getId() {
     return id;
+  }
+
+  public int getType() {
+    return type;
   }
 
   @Override
@@ -31,31 +32,46 @@ public class Animal {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals (name) VALUES (:name);";
+      String sql = "INSERT INTO animals (name, type) VALUES (:name, :type);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
+        .addParameter("type", this.type)
         .executeUpdate()
         .getKey();
     }
   }
 
-  public static List<Animal> all() {
+  public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM animals;";
-      return con.createQuery(sql)
-        .executeAndFetch(Animal.class);
+      String sql = "INSERT INTO animals (name, health, age, type) VALUES (:name, :health, :age, :type);";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("name", this.name)
+        .addParameter("health", this.health)
+        .addParameter("age", this.age)
+        .addParameter("type", this.type)
+        .throwOnMappingFailure(false)
+        .executeUpdate()
+        .getKey();
     }
   }
 
-  public static Animal find(int id) {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM animals WHERE id=:id;";
-      Animal animal = con.createQuery(sql)
-        .addParameter("id", id)
-        .executeAndFetchFirst(Animal.class);
-      return animal;
-    }
-  }
+  // public static List<Animal> all() {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "SELECT * FROM animals;";
+  //     return con.createQuery(sql)
+  //       .executeAndFetch(Animal.class);
+  //   }
+  // }
+
+  // public static Animal find(int id) {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "SELECT * FROM animals WHERE id=:id;";
+  //     Animal animal = con.createQuery(sql)
+  //       .addParameter("id", id)
+  //       .executeAndFetchFirst(Animal.class);
+  //     return animal;
+  //   }
+  // }
 
   public void updateName(String name) {
     try(Connection con = DB.sql2o.open()) {

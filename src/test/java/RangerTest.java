@@ -38,4 +38,12 @@ public class RangerTest {
     assertEquals(true, Ranger.all().get(1).equals(secondRanger));
   }
 
+  @Test
+  public void updateName_updatesNameOfRanger_true() {
+    Ranger testRanger = new Ranger("Jane");
+    testRanger.save();
+    testRanger.updateName("Jan");
+    assertEquals("Jan", Ranger.find(testRanger.getId()).getName());
+  }
+
 }

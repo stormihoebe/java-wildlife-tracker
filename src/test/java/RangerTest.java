@@ -27,4 +27,15 @@ public class RangerTest {
     testRanger.save();
     assertTrue(0 < testRanger.getId());
   }
+
+  @Test
+  public void all_returnsAllInstancesOfRanger_true() {
+    Ranger firstRanger = new Ranger("Rick");
+    firstRanger.save();
+    Ranger secondRanger = new Ranger("Jane");
+    secondRanger.save();
+    assertEquals(true, Ranger.all().get(0).equals(firstRanger));
+    assertEquals(true, Ranger.all().get(1).equals(secondRanger));
+  }
+
 }

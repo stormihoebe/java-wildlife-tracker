@@ -11,15 +11,22 @@ public class App {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
-    // get("/", (request, response) -> {
-    //   Map<String, Object> model = new HashMap<String, Object>();
-    //   model.put("animals", Animal.all());
-    //   model.put("endangeredAnimals", EndangeredAnimal.all());
-    //   model.put("sightings", Sighting.all());
-    //   model.put("template", "templates/index.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
+    get("/", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      // model.put("nonEndangeredAnimals", NonEndangeredAnimal.all());
+      // model.put("endangeredAnimals", EndangeredAnimal.all());
+      // model.put("sightings", Sighting.all());
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/animals/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/animal-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
     //
+
     // post("/endangered_sighting", (request, response) -> {
     //   Map<String, Object> model = new HashMap<String, Object>();
     //   String rangerName = request.queryParams("rangerName");

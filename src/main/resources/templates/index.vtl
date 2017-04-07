@@ -1,14 +1,59 @@
-<h1>Report a Wildlife Sighting</h1>
+<h1>Welcome to the Wildlife Reporting System</h1>
+<h3>This system allows the Forest Service to report and track wildlife sightings for the purpose of conducting an environmental survey.</h3>
+
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+<div class="container-fluid">
+  <div class="row grey-row img-rounded">
+  <div class="col-md-3">
+    <a class = "unstyledlinks" href="/animals/new"><div class="boxes img-rounded">
+      <h4>Document Animals</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </div></a>
+  </div>
+  <div class="col-md-3">
+    <a class = "unstyledlinks" href="/animals/report-sighting"><div class="boxes img-rounded">
+      <h4>Report Sightings</h4>
+      <p>
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div></a>
+  </div>
+  <div class="col-md-3">
+    <a class = "unstyledlinks" href="/animals"><div class="boxes img-rounded">
+      <h4>Catalog Animals</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </div></a>
+  </div>
+  <div class="col-md-3">
+    <a class = "unstyledlinks" href="/sightings"><div class="boxes img-rounded">
+      <h4>Catalog Sightings</h4>
+      <p>
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div></a>
+  </div>
+
+</div>
 
 <h3><a href="/animal/new">Add Animal to System</a></h3>
 <hr>
 
 <h3> Report Non-Endangered Animal Sighting </h3>
 <form action="/sighting" method="post">
-  #if($animals.size() >= 0)
+  #if($nonEndangeredAnimals.size() >= 0)
     <label>Select Animal</label>
     <select name="animalSelected">
-      #foreach($animal in $animals)
+      #foreach($animal in $nonEndangeredAnimals)
         <option value="$animal.getId()">$animal.getName()</option>
       #end
     </select>
@@ -57,10 +102,10 @@
 #end
 
 <h3>All Animals & Sightings</h3>
-#if ($animals.size() == 0)
+#if ($nonEndangeredAnimals.size() == 0)
   <a href="/animal/new">Add Animal to Database to Report a Sighting</a>
 #else
-  #foreach ($animal in $animals)
+  #foreach ($animal in $nonEndangeredAnimals)
     <a href="/animal/$animal.getId()" class="thumbnail">
       <h4>$animal.getName()</h4>
       <h4>$animal.getSightings().size() Reported Sighting(s)</h4>

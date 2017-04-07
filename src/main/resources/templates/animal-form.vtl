@@ -1,29 +1,65 @@
-<h4><a href="/">Home</a></h4>
-
 <h1>Add Animal to Database</h1>
-
-<form action="/animal/new" method="post">
-  <label>Animal Species</label>
-  <input type="text" name="name">
-  <label>Endangered?</label>
-  <input type="checkbox" name="endangered">
-
-  <h3>Additional Info for Endangered Animals:</h3>
-
-  <label>Health</label>
-  <select name="health">
-    <option>Ill</option>
-    <option>Okay</option>
-    <option>Healthy</option>
-  </select>
-
-  <label>Age</label>
-  <select name="age">
-    <option>Newborn</option>
-    <option>Young</option>
-    <option>Adult</option>
-  </select>
-
-  <button type="submit">Add Animal</button>
-  
-</form>
+<h4>NOTICE: Before Adding Animal, View the <a href="/animals">Wild Animal Catalog</a> to Ensure Animal is Not Already Registered.</h4>
+<br>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Register Non-Endangered Animal</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/animals/new/nonEndangered" method="post">
+          <input id="type" name="type" type="hidden" value="nonEndangered">
+          <div class="form-group">
+            <label for = "name">Animal Species</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
+          <div class="checkbox">
+           <label>
+             <input type="checkbox" required> I certify that I have checked the animal catalog to confirm that this animal species has not already been registered by another user.
+           </label>
+         </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Register Endangered Animal</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/animals/new/endangered" method="post">
+          <input id="type" name="type" type="hidden" value="Endangered">
+          <div class="form-group">
+            <label for = "name">Animal Species</label>
+            <input type="text" name="name" class="form-control" required>
+            <div class="form-group">
+              <label>Health</label>
+              <select name="health" class="form-control">
+                <option>Ill</option>
+                <option>Okay</option>
+                <option>Healthy</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Age</label>
+              <select name="age" class="form-control">
+                <option>Newborn</option>
+                <option>Young</option>
+                <option>Adult</option>
+              </select>
+            </div>
+          </div>
+          <div class="checkbox">
+           <label>
+             <input type="checkbox" required> I certify that I have checked the animal catalog to confirm that this animal species has not already been registered by another user.
+           </label>
+         </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

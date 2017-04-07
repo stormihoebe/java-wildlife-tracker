@@ -47,4 +47,11 @@ public Ranger(String name) {
       return this.getName().equals(newRanger.getName()) && this.getId() == newRanger.getId();
     }
   }
+
+  public static List<Ranger> all() {
+    String sql = "SELECT * FROM rangers";
+    try(Connection con = DB.sql2o.open()) {
+    return con.createQuery(sql).executeAndFetch(Ranger.class);
+    }
+  }
 }

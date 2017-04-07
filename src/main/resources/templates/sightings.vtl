@@ -1,13 +1,47 @@
 <div class="panel panel-default">
-  <!-- <div class="panel-heading">
+  <div class="panel-heading">
     <h3 class="panel-title">Animal Sightings</h3>
   </div>
   <div class="panel-body">
-    #foreach ($sighting in $Sightings)
-        <h4>$animal.getName()</h4>
-        <p>$animal.getSightings().size() Reported Sighting(s)</p>
-    #end
-    <a href="/animals/new"><button type="button" name="button" class="btn btn-primary">Add New Non-Endangered Animal</button></a>
-  </div> -->
+    #foreach ($sighting in $sightings)
+      #foreach($animal in $animals)
+        #if ($sighting.getAnimalId() == $animal.getId())
+        <div class="panel panel-default">
+          <a href="/animals/$animal.getId()"><div class="panel-heading">
+            <h3 class="panel-title">$animal.getName()</h3>
+          </div></a>
+          <div class="panel-body">
+            <p>
+              Endangered Status:
+              #if ($animal.getType().equals("endangered"))
+                Endangered Species
+              #else
+                Non-Endangered Species
+              #end
+            </p>
+            <p>
+              Location: $sighting.getLocation();
+            </p>
+            <p>
+              Date Submitted: $sighting.getSightingTime().getMonth()/$sighting.getSightingTime().getDate()/2017
+
+            </p>
+            <p>
+              Ranger Name, ID:
+              #foreach($ranger in $rangers)
+                #if ($sighting.getRangerId() == $ranger.getId())
+                  $ranger.getName(),  $sighting.getRangerId()
+                #end
+              #end
+            </p>
+          </div>
+        </div>
+          #end
+        #end
+      #end
+
+
+    <a href="/sightings/new"><button type="button" name="button" class="btn btn-primary">Report New Sighting</button></a>
+  </div>
 
 </div>

@@ -37,6 +37,20 @@ public class EndangeredAnimal extends Animal{
     }
   }
 
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO animals (name, health, age, type) VALUES (:name, :health, :age, :type);";
+      this.id = (int) con.createQuery(sql, true)
+        .throwOnMappingFailure(false)
+        .addParameter("name", this.name)
+        .addParameter("health", this.health)
+        .addParameter("age", this.age)
+        .addParameter("type", this.type)
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
   public static List<EndangeredAnimal> all() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM animals where type = 'endangered';";

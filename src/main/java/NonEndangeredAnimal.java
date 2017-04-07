@@ -40,6 +40,17 @@ public class NonEndangeredAnimal extends Animal{
       return nonEndangeredAnimal;
     }
   }
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO animals (name, type) VALUES (:name, :type);";
+      this.id = (int) con.createQuery(sql, true)
+        .throwOnMappingFailure(false)
+        .addParameter("name", this.name)
+        .addParameter("type", this.type)
+        .executeUpdate()
+        .getKey();
+    }
+  }
 
 
 }

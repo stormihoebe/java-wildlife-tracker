@@ -16,7 +16,7 @@ public abstract class Animal {
     return id;
   }
 
-  public int getType() {
+  public String getType() {
     return type;
   }
 
@@ -30,30 +30,8 @@ public abstract class Animal {
     }
   }
 
-  public void save() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals (name, type) VALUES (:name, :type);";
-      this.id = (int) con.createQuery(sql, true)
-        .addParameter("name", this.name)
-        .addParameter("type", this.type)
-        .executeUpdate()
-        .getKey();
-    }
-  }
 
-  public void save() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals (name, health, age, type) VALUES (:name, :health, :age, :type);";
-      this.id = (int) con.createQuery(sql, true)
-        .addParameter("name", this.name)
-        .addParameter("health", this.health)
-        .addParameter("age", this.age)
-        .addParameter("type", this.type)
-        .throwOnMappingFailure(false)
-        .executeUpdate()
-        .getKey();
-    }
-  }
+
 
   // public static List<Animal> all() {
   //   try(Connection con = DB.sql2o.open()) {

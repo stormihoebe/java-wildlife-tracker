@@ -79,6 +79,7 @@ public abstract class Animal {
       con.createQuery(sql)
         .addParameter("id", id)
         .addParameter("name", name)
+        .throwOnMappingFailure(false)
         .executeUpdate();
     }
   }
@@ -88,6 +89,7 @@ public abstract class Animal {
       String sql = "DELETE FROM animals WHERE id=:id;";
       con.createQuery(sql)
         .addParameter("id", id)
+        .throwOnMappingFailure(false)
         .executeUpdate();
     }
   }
@@ -97,6 +99,7 @@ public abstract class Animal {
       String sql = "SELECT * FROM sightings WHERE animal_id=:id;";
         List<Sighting> sightings = con.createQuery(sql)
           .addParameter("id", id)
+          .throwOnMappingFailure(false)
           .executeAndFetch(Sighting.class);
       return sightings;
     }

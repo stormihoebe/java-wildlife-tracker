@@ -60,4 +60,18 @@ public class NonEndangeredAnimalTest {
     secondNonEndangeredAnimal.save();
     assertEquals(NonEndangeredAnimal.find(secondNonEndangeredAnimal.getId()), secondNonEndangeredAnimal);
   }
+
+  @Test
+  public void delete_deletesNonEndangeredAnimalFromDatabase_true() {
+    NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Bear");
+    testNonEndangeredAnimal.save();
+    testNonEndangeredAnimal.delete();
+    assertEquals(0, NonEndangeredAnimal.all().size());
+  }
+  public void updateName_updatesNonEndangeredAnimalNameInDatabase_UpdatedName() {
+    NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Bear");
+    testNonEndangeredAnimal.save();
+    testNonEndangeredAnimal.updateName("Little Bear");
+    assertEquals("Little Bear", testNonEndangeredAnimal.getName());
+  }
 }

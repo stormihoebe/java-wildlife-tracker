@@ -1,0 +1,118 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Report a Sighting</h3>
+  </div>
+  <div class="panel-body">
+    <form action="/sightings/new" method="post">
+      <input id="type" name="type" type="hidden" value="nonEndangered">
+      <div class="form-group">
+        <label>Select Animal</label>
+        <select name="animal" class="form-control">
+          #foreach($animal in $animals)
+            <option value="$animal.getId()">$animal.getName()</option>
+          #end
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Location</label>
+        <select name="location" class="form-control">
+            <option value="Zone A">Zone A</option>
+            <option value="Zone B">Zone B</option>
+            <option value="Zone C">Zone C</option>
+            <option value="Zone D">Zone D</option>
+            <option value="Zone E">Zone E</option>
+            <option value="Zone F">Zone F</option>
+            <option value="Zone G">Zone G</option>
+        </select>
+      </div>
+      <div class="form-group" class="form-control">
+        <label>Ranger Name, ID #</label>
+        <select name="ranger">
+          #foreach($ranger in $rangers)
+            <option value="$ranger.getId()">$ranger.getName(), $ranger.getId()</option>
+          #end
+        </select>
+
+      </div>
+      <div class="checkbox">
+       <label>
+         <input type="checkbox" required> I verify that I am a registered ranger with the authority to report official animal sightings.
+       </label>
+     </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br>
+    <p>
+      Rangers that have not yet registered with WRS please complete registration before submitting form.
+    </p>
+         <a href="/rangers"><button type="button" name="button" class="btn btn-xs btn-default">Register Ranger</button></a>
+  </div>
+</div>
+
+
+
+
+<h2>Is the animal you spotted not listed? Register a new animal using the appropriate form below.</h2>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Register Non-Endangered Animal</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/animals/new/nonEndangered" method="post">
+          <input id="type" name="type" type="hidden" value="nonEndangered">
+          <div class="form-group">
+            <label for = "name">Animal Species</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
+          <div class="checkbox">
+           <label>
+             <input type="checkbox" required> I certify that I have checked the animal catalog to confirm that this animal species has not already been registered by another user.
+           </label>
+         </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Register Endangered Animal</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/animals/new/endangered" method="post">
+          <input id="type" name="type" type="hidden" value="Endangered">
+          <div class="form-group">
+            <label for = "name">Animal Species</label>
+            <input type="text" name="name" class="form-control" required>
+            <div class="form-group">
+              <label>Health</label>
+              <select name="health" class="form-control">
+                <option>Ill</option>
+                <option>Okay</option>
+                <option>Healthy</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Age</label>
+              <select name="age" class="form-control">
+                <option>Newborn</option>
+                <option>Young</option>
+                <option>Adult</option>
+              </select>
+            </div>
+          </div>
+          <div class="checkbox">
+           <label>
+             <input type="checkbox" required> I certify that I have checked the animal catalog to confirm that this animal species has not already been registered by another user.
+           </label>
+         </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,13 +33,24 @@ public abstract class Animal {
 
 
 
-  // public static List<Animal> all() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "SELECT * FROM animals;";
-  //     return con.createQuery(sql)
-  //       .executeAndFetch(Animal.class);
-  //   }
-  // }
+  public static List<Object> getAllAnimals() {
+    List<Object> allAnimals = new ArrayList<Object>();
+
+    try(Connection con = DB.sql2o.open()) {
+      String sqlEndangered = "SELECT * FROM animals WHERE type = 'endangered';";
+      List<EndangeredAnimal> endangeredAnimals = con.createQuery(sqlEndangered)
+      .throwOnMappingFailure(false)
+      .executeAndFetch(EndangeredAnimal.class);
+      allAnimals.addAll(endangeredAnimals);
+
+      String sqlNonEndangeredAnimal = "SELECT * FROM animals WHERE type = 'nonEndangered';";
+      List<NonEndangeredAnimal> nonEndangeredAnimals = con.createQuery(sqlNonEndangeredAnimal)
+      .throwOnMappingFailure(false)
+      .executeAndFetch(NonEndangeredAnimal.class);
+      allAnimals.addAll(nonEndangeredAnimals);
+    }
+    return allAnimals;
+  }
 
   // public static Animal find(int id) {
   //   try(Connection con = DB.sql2o.open()) {

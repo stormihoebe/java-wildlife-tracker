@@ -79,4 +79,14 @@ public class NonEndangeredAnimalTest {
   public void find_returnsNullWhenNoNonEndangeredAnimalFound_null() {
     assertTrue(NonEndangeredAnimal.find(999) == null);
   }
+
+  @Test
+  public void getAllAnimals_ListsBothEndangeredAndNonEndangeredAnimals_true() {
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
+    NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Rabbit");
+    testEndangeredAnimal.save();
+    testNonEndangeredAnimal.save();
+    assertTrue(NonEndangeredAnimal.getAllAnimals().get(0).equals(testEndangeredAnimal));
+    assertTrue(NonEndangeredAnimal.getAllAnimals().get(1).equals(testNonEndangeredAnimal));
+  }
 }

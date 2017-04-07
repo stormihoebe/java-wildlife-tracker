@@ -33,6 +33,11 @@ public class EndangeredAnimalTest {
     EndangeredAnimal savedEndangeredAnimal = EndangeredAnimal.all().get(0);
     assertEquals(testEndangeredAnimal.getId(), savedEndangeredAnimal.getId());
   }
+  @Test(expected = IllegalArgumentException.class)
+  public void save_throwsExceptionIfHealthInputIsInvalid(){
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "kind of okay, I guess", "Young");
+    testEndangeredAnimal.save();
+    }
 
   @Test
   public void all_returnsAllInstancesOfEndangeredAnimal_true() {

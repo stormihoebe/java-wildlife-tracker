@@ -7,9 +7,9 @@ public class EndangeredAnimal extends Animal{
   private String health;
   private String age;
 
-  public static final String HEALTH_ILL = "ill";
-  public static final String HEALTH_OKAY = "okay";
-  public static final String HEALTH_HEALTHY = "healthy";
+  public static final String HEALTH_ILL = "Ill";
+  public static final String HEALTH_OKAY = "Okay";
+  public static final String HEALTH_HEALTHY = "Healthy";
 
 
   public EndangeredAnimal(String name, String health, String age) {
@@ -38,6 +38,9 @@ public class EndangeredAnimal extends Animal{
   }
 
   public void save() {
+    if (!health.equals(HEALTH_ILL) && !health.equals(HEALTH_OKAY) && !health.equals(HEALTH_HEALTHY)){
+      throw new IllegalArgumentException("improper health input, most be one of the following: 'Ill', 'Okay', 'Healthy'. Other input is invalid");
+    }
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO animals (name, health, age, type) VALUES (:name, :health, :age, :type);";
       this.id = (int) con.createQuery(sql, true)

@@ -1,0 +1,27 @@
+<h1>Ranger Registry</h1>
+<h3>Please complete registration before making changes to the Wildlife Reporting System.</h3>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Register Ranger</h3>
+  </div>
+  <div class="panel-body">
+    <form action="/rangers" method="post">
+      <div class="form-group">
+        <label for = "name">Ranger Name</label>
+        <input type="text" name="name" class="form-control" required>
+      </div>
+      <div class="checkbox">
+       <label>
+         <input type="checkbox" required> I certify that I am a Forest Service Ranger with the authority to make changes to the WRS.
+       </label>
+     </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+</div>
+<br>
+<br>
+<h2>Registered Ranger</h2>
+#foreach ($ranger in $rangers)
+  <div class="well well-sm">$ranger.getName()        <spanclass="align-right">$ranger.getId()</span></div>
+#end

@@ -105,5 +105,22 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/rangers", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("rangers", Ranger.all());
+      model.put("template", "templates/rangers.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/rangers", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      // model.put("rangers", Ranger.all());
+      String name = request.queryParams("name");
+      Ranger ranger = new Ranger(name);
+      ranger.save();
+      String url = String.format("/rangers");
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 }

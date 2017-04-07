@@ -14,20 +14,41 @@ public class NonEndangeredAnimalTest {
     NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
     assertEquals(true, testNonEndangeredAnimal instanceof NonEndangeredAnimal);
   }
+
   @Test
   public void getName_nonEndangeredAnimalInstantiatesWithName_Deer() {
     NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
     assertEquals("Deer", testNonEndangeredAnimal.getName());
   }
+
   @Test
   public void getType_nonEndangeredAnimalInstantiatesWithType_Deer() {
     NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
     assertEquals("nonEndangered", testNonEndangeredAnimal.getType());
   }
+
   @Test
   public void equals_returnsTrueIfNameIsTheSame_true() {
     NonEndangeredAnimal firstNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
     NonEndangeredAnimal anotherNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
     assertTrue(firstNonEndangeredAnimal.equals(anotherNonEndangeredAnimal));
+  }
+
+  @Test
+  public void save_assignsIdToObjectAndSavesObjectToDatabase() {
+    NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
+    testNonEndangeredAnimal.save();
+    NonEndangeredAnimal savedNonEndangeredAnimal = NonEndangeredAnimal.all().get(0);
+    assertEquals(testNonEndangeredAnimal.getId(), savedNonEndangeredAnimal.getId());
+  }
+
+  @Test
+  public void all_returnsAllInstancesOfNonEndangeredAnimal_true() {
+    NonEndangeredAnimal firstNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
+    firstNonEndangeredAnimal.save();
+    NonEndangeredAnimal secondNonEndangeredAnimal = new NonEndangeredAnimal("Black Bear");
+    secondNonEndangeredAnimal.save();
+    assertEquals(true, NonEndangeredAnimal.all().get(0).equals(firstNonEndangeredAnimal));
+    assertEquals(true, NonEndangeredAnimal.all().get(1).equals(secondNonEndangeredAnimal));
   }
 }

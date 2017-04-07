@@ -8,10 +8,12 @@
         #foreach ($animal in $nonEndangeredAnimals)
           <a href="/animals/$animal.getId()" class="thumbnail">
             <h4>$animal.getName()</h4>
-            <h4>$animal.getSightings().size() Reported Sighting(s)</h4>
+            <p>$animal.getSightings().size() Reported Sighting(s)</p>
           </a>
         #end
+        <a href="/animals/new"><button type="button" name="button" class="btn btn-primary">Add New Non-Endangered Animal</button></a>
       </div>
+
     </div>
   </div>
 
@@ -24,9 +26,10 @@
         #foreach ($animal in $endangeredAnimals)
           <a href="/animals/$animal.getId()" class="thumbnail">
             <h4>$animal.getName()</h4>
-            <h4>$animal.getSightings().size() Reported Sighting(s)</h4>
+            <p>$animal.getSightings().size() Reported Sighting(s)</p>
           </a>
         #end
+        <a href="/animals/new"><button type="button" name="button" class="btn btn-primary">Add New Endangered Animal</button></a>
       </div>
     </div>
   </div>

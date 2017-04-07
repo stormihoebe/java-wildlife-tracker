@@ -74,4 +74,9 @@ public class NonEndangeredAnimalTest {
     testNonEndangeredAnimal.updateName("Little Bear");
     assertEquals("Little Bear", testNonEndangeredAnimal.getName());
   }
+  
+  @Test
+  public void find_returnsNullWhenNoNonEndangeredAnimalFound_null() {
+    assertTrue(NonEndangeredAnimal.find(999) == null);
+  }
 }

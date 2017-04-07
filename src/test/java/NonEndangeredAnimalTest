@@ -19,4 +19,9 @@ public class NonEndangeredAnimalTest {
     NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
     assertEquals("Deer", testNonEndangeredAnimal.getName());
   }
+  @Test
+  public void getType_nonEndangeredAnimalInstantiatesWithType_Deer() {
+    NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
+    assertEquals("nonEndangered", testNonEndangeredAnimal.getType());
+  }
 }

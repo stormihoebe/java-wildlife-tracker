@@ -22,7 +22,7 @@ public class NonEndangeredAnimalTest {
   }
 
   @Test
-  public void getType_nonEndangeredAnimalInstantiatesWithType_Bear() {
+  public void getType_nonEndangeredAnimalInstantiatesWithType_nonEndangered() {
     NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Bear");
     assertEquals("nonEndangered", testNonEndangeredAnimal.getType());
   }
@@ -74,7 +74,7 @@ public class NonEndangeredAnimalTest {
     testNonEndangeredAnimal.updateName("Little Bear");
     assertEquals("Little Bear", testNonEndangeredAnimal.getName());
   }
-  
+
   @Test
   public void find_returnsNullWhenNoNonEndangeredAnimalFound_null() {
     assertTrue(NonEndangeredAnimal.find(999) == null);

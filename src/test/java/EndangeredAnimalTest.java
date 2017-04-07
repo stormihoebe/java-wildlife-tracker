@@ -20,6 +20,11 @@ public class EndangeredAnimalTest {
     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
     assertEquals("Healthy", testEndangeredAnimal.getHealth());
   }
+  @Test
+  public void getType_endangeredAnimalInstantiatesWithType_Endangered() {
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "Young");
+    assertEquals("endangered", testEndangeredAnimal.getType());
+  }
 
   @Test
   public void save_assignsIdAndSavesObjectToDatabase() {

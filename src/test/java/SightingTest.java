@@ -23,6 +23,15 @@ public class SightingTest {
   }
 
   @Test
+  public void getTime_sightingSavesWithTimeStamp_true() {
+    Sighting testSighting = new Sighting(2, "45.472428, -121.946466", 2);
+    testSighting.save();
+    Timestamp savedTime = Sighting.find(testSighting.getId()).getSightingTime();
+    Timestamp rightNow = new Timestamp(new Date().getTime());
+    assertEquals(rightNow.getDay(), savedTime.getDay());
+  }
+
+  @Test
   public void equals_returnsTrueIfLocationAndDescriptionAreSame_true() {
     NonEndangeredAnimal testNonEndangeredAnimal = new NonEndangeredAnimal("Deer");
     testNonEndangeredAnimal.save();

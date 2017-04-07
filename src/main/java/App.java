@@ -26,17 +26,19 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/animal/new/nonEndangered", (request, response) -> {
+    post("/animals/new/nonEndangered", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String name = request.queryParams("name");
       NonEndangeredAnimal animal = new NonEndangeredAnimal(name);
       animal.save();
       model.put("nonEndangeredAnimals", NonEndangeredAnimal.all());
       model.put("endangeredAnimals", EndangeredAnimal.all());
-      response.redirect("/animals");
-    });
+      String url = String.format("/animals");
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
-    post("/animal/new/endangered", (request, response) -> {
+    post("/animals/new/endangered", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String name = request.queryParams("name");
       String health = request.queryParams("health");
@@ -45,12 +47,16 @@ public class App {
       animal.save();
       model.put("nonEndangeredAnimals", NonEndangeredAnimal.all());
       model.put("endangeredAnimals", EndangeredAnimal.all());
-      response.redirect("/animals");
-    });
+      String url = String.format("/animals");
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
-    get("/animals/new", (request, response) -> {
+    get("/animals", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("template", "templates/animal-form.vtl");
+      model.put("nonEndangeredAnimals", NonEndangeredAnimal.all());
+      model.put("endangeredAnimals", EndangeredAnimal.all());
+      model.put("template", "templates/animals.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

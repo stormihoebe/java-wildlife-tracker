@@ -37,7 +37,12 @@ public class EndangeredAnimalTest {
   public void save_throwsExceptionIfHealthInputIsInvalid(){
     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "kind of okay, I guess", "Young");
     testEndangeredAnimal.save();
-    }
+  }
+  @Test(expected = IllegalArgumentException.class)
+  public void save_throwsExceptionIfAgeInputIsInvalid(){
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Fox", "Healthy", "little baby foxy");
+    testEndangeredAnimal.save();
+  }
 
   @Test
   public void all_returnsAllInstancesOfEndangeredAnimal_true() {

@@ -16,8 +16,15 @@ public class RangerTest {
   }
 
   @Test
-  public void Ranger_instantiatesWithName_true() {
+  public void getName_instantiatesWithName_true() {
     Ranger testRanger = new Ranger("Rick");
     assertEquals("Rick", testRanger.getName());
+  }
+
+  @Test
+  public void getId_IdAssignedOnSave_true() {
+    Ranger testRanger = new Ranger("Rick");
+    testRanger.save();
+    assertTrue(0 < testRanger.getId());
   }
 }

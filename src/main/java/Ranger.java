@@ -37,4 +37,14 @@ public Ranger(String name) {
       .executeUpdate();
     }
   }
+
+  @Override
+  public boolean equals(Object otherRanger){
+    if(!(otherRanger instanceof Ranger)){
+      return false;
+    } else {
+      Ranger newRanger = (Ranger) otherRanger;
+      return this.getName().equals(newRanger.getName()) && this.getId() == newRanger.getId();
+    }
+  }
 }
